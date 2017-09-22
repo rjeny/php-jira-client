@@ -1,6 +1,6 @@
 <?php
 
-namespace Rjeny\Jira\Entities\Issue\Fields;
+namespace Rjeny\Jira\Entities\Fields;
 
 class GroupPicker extends Field
 {

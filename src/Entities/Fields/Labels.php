@@ -1,14 +1,15 @@
 <?php
 
-namespace Rjeny\Jira\Entities\Issue\Fields;
+namespace Rjeny\Jira\Entities\Fields;
 
-class URLField extends Field
+class Labels extends Field
 {
     function __construct($id, $value)
     {
-        if (!preg_match('/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/', $value)){
-            $value = null;
+        if (!is_array($value)) {
+            $value = [$value];
         }
+
         parent::__construct($id, $value);
     }
 
