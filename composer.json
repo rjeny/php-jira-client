@@ -11,6 +11,6 @@
     "psr-4": {
       "Rjeny\\Jira\\": "src/"
     }
-  }
+  },
   "minimum-stability": "stable"
 }
