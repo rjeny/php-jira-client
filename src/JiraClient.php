@@ -18,7 +18,7 @@ class JiraClient
 
     protected $request;
 
-    function __construct(Auth $auth, $configOrBaseUrl, $apiVer=null)
+    function __construct($auth, $configOrBaseUrl, $apiVer=null)
     {
         $this->auth = $auth;
 
