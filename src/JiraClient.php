@@ -79,6 +79,8 @@ class JiraClient
 
         $response = json_decode($response, true);
 
+        echo ($response);
+
         curl_close($ch);
 
         return $response;
