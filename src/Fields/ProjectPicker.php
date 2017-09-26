@@ -22,15 +22,10 @@ class ProjectPicker extends BaseAbstractField
      */
     public function getField()
     {
-        $field = [];
-        foreach ($this->value as $value) {
-            if (is_int($value)) {
-                $field[] = ['id' => (string)$value];
-            } else {
-                $field[] = ['key' => $value];
-            }
+        if (is_int($this->value)) {
+            return ['id' => (string)$this->value];
+        } else {
+            return ['key' => $this->value];
         }
-
-        return $field;
     }
 }

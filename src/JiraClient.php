@@ -2,11 +2,11 @@
 
 namespace Rjeny\Jira;
 
+use MongoLog;
 /**
  * Jira REST API client
+ *
  */
-
-use Rjeny\Jira\Auth\Auth;
 
 class JiraClient
 {
@@ -41,6 +41,8 @@ class JiraClient
         // Build url
         $url = $this->baseUrl . '/rest/api/' . $this->apiVer . '/' . $entity . '/';
 
+        echo $url;
+
         // Если будем работать методом get, то все параметры в ссылку
         if ($method == 'GET') {
             $url .= '&' . http_build_query($params);
@@ -57,7 +59,7 @@ class JiraClient
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, false);
 
-        // T
+
         if ($method == 'POST' && $params) {
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($params));
@@ -69,6 +71,8 @@ class JiraClient
             curl_setopt($ch, CURLOPT_HTTPHEADER, ['X-Atlassian-Token: no-check']);
         }
 
+        echo print_r($params);
+
         $response = curl_exec($ch);
         $errno    = curl_errno($ch);
         $error    = curl_error($ch);
@@ -79,7 +83,11 @@ class JiraClient
 
         $response = json_decode($response, true);
 
-        echo ($response);
+        if (isset($response['errorMessages']) || isset($response['errors'])) {
+            throw new JiraException(print_r($response['errors'], true));
+        }
+
+        echo (print_r($response, true));
 
         curl_close($ch);
 

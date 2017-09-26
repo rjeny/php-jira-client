@@ -32,6 +32,11 @@ abstract class BaseAbstractEntity
     protected $id;
 
     /**
+     * @var
+     */
+    protected $self;
+
+    /**
      * @var mixed
      */
     protected $data;
@@ -73,7 +78,7 @@ abstract class BaseAbstractEntity
      */
     public function __get($name)
     {
-        if (isset($this->$$name)) {
+        if (property_exists($this, $name)) {
             return $this->$$name;
         }
 
@@ -83,4 +88,5 @@ abstract class BaseAbstractEntity
 
         return null;
     }
+
 }
