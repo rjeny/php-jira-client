@@ -11,10 +11,5 @@
     "psr-4": {
       "Rjeny\\Jira\\": "src/"
     }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "tests\\Rjeny\\": "tests/"
-    }
   }
 }
