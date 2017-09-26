@@ -2,7 +2,7 @@
 
 namespace Rjeny\Jira\Fields;
 
-class GroupPicker extends AbstractField
+class GroupPicker extends BaseAbstractField
 {
     function __construct($id, $values)
     {

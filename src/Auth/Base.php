@@ -1,7 +1,7 @@
 <?php
 namespace Rjeny\Jira\Auth;
 
-class Base implements Auth
+class Base implements AuthInterface
 {
     private $username;
 

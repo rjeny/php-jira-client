@@ -7,7 +7,7 @@ use \Rjeny\Jira\JiraClient;
  * Class Entity
  * @package Rjeny\Jira\Entities
  */
-abstract class Entity
+abstract class BaseAbstractEntity
 {
     /**
      * Name. Used in URI

@@ -2,7 +2,7 @@
 
 namespace Rjeny\Jira\Fields;
 
-class SingleVersionPicker extends AbstractField
+class SingleVersionPicker extends BaseAbstractField
 {
     function __construct($id, $values)
     {

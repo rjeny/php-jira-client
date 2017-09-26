@@ -2,7 +2,7 @@
 
 namespace Rjeny\Jira\Fields;
 
-class SelectList extends AbstractField
+class SelectList extends BaseAbstractField
 {
     function __construct($id, $values)
     {

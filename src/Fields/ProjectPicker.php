@@ -2,7 +2,7 @@
 
 namespace Rjeny\Jira\Fields;
 
-class ProjectPicker extends AbstractField
+class ProjectPicker extends BaseAbstractField
 {
     function __construct($id, $values)
     {

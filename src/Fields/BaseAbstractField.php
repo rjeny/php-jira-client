@@ -4,7 +4,7 @@ namespace Rjeny\Jira\Fields;
 
 use Rjeny\Jira\JiraException;
 
-abstract class AbstractField
+abstract class BaseAbstractField
 {
     protected $type = 'SomeField';
 

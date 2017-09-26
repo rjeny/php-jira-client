@@ -2,7 +2,7 @@
 
 namespace Rjeny\Jira\Fields;
 
-class DateTimeField extends AbstractField
+class DateTimeField extends BaseAbstractField
 {
 
     function __construct($id, \DateTime $value)

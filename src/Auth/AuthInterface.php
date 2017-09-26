@@ -5,7 +5,7 @@ namespace Rjeny\Jira\Auth;
 /**
  * Interface for auth
  */
-interface Auth
+interface AuthInterface
 {
     public function setAuthHead(&$ch);
 }

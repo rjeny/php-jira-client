@@ -2,7 +2,7 @@
 
 namespace Rjeny\Jira\Fields;
 
-class TextField extends AbstractField
+class TextField extends BaseAbstractField
 {
     /**
      * Returns field value for requests

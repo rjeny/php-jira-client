@@ -7,7 +7,7 @@ use Rjeny\Jira\Fields\AbstractField;
 use Rjeny\Jira\JiraException;
 use Rjeny\Jira\JiraClient;
 
-class Issue extends Entity
+class Issue extends BaseAbstractEntity
 {
     private $cfs = [];
 

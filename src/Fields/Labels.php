@@ -2,7 +2,7 @@
 
 namespace Rjeny\Jira\Fields;
 
-class Labels extends AbstractField
+class Labels extends BaseAbstractField
 {
     function __construct($id, $value)
     {

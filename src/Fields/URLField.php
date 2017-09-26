@@ -2,7 +2,7 @@
 
 namespace Rjeny\Jira\Fields;
 
-class URLField extends AbstractField
+class URLField extends BaseAbstractField
 {
     function __construct($id, $value)
     {

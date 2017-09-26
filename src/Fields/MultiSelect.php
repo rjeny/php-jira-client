@@ -2,7 +2,7 @@
 
 namespace Rjeny\Jira\Fields;
 
-class MultiSelect extends AbstractField
+class MultiSelect extends BaseAbstractField
 {
     function __construct($id, $values)
     {

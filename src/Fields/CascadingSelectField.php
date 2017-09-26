@@ -2,7 +2,7 @@
 
 namespace Rjeny\Jira\Fields;
 
-class CascadingSelectField extends AbstractField
+class CascadingSelectField extends BaseAbstractField
 {
 
     function __construct($id, $parent, $child=null)
