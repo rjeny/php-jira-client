@@ -1,8 +1,8 @@
 <?php
 
-namespace Rjeny\Jira\Entities\Fields;
+namespace Rjeny\Jira\Fields;
 
-class TextField extends Field
+class TextField extends AbstractField
 {
     /**
      * Returns field value for requests

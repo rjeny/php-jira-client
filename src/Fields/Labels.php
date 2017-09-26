@@ -1,13 +1,14 @@
 <?php
 
-namespace Rjeny\Jira\Entities\Fields;
+namespace Rjeny\Jira\Fields;
 
-class DateTimeField extends Field
+class Labels extends AbstractField
 {
-
-    function __construct($id, \DateTime $value)
+    function __construct($id, $value)
     {
-        $value = $value->format('Y-m-d\TH-i-s.\0\0\0\Z');
+        if (!is_array($value)) {
+            $value = [$value];
+        }
 
         parent::__construct($id, $value);
     }

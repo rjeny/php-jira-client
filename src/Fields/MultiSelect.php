@@ -1,8 +1,8 @@
 <?php
 
-namespace Rjeny\Jira\Entities\Fields;
+namespace Rjeny\Jira\Fields;
 
-class ProjectPicker extends Field
+class MultiSelect extends AbstractField
 {
     function __construct($id, $values)
     {
@@ -24,11 +24,7 @@ class ProjectPicker extends Field
     {
         $field = [];
         foreach ($this->value as $value) {
-            if (is_int($value)) {
-                $field[] = ['id' => (string)$value];
-            } else {
-                $field[] = ['key' => $value];
-            }
+           $field[] = ['value' => $value];
         }
 
         return $field;

@@ -1,14 +1,12 @@
 <?php
 
-namespace Rjeny\Jira\Entities\Fields;
+namespace Rjeny\Jira\Fields;
 
-class Labels extends Field
+class NumberField extends AbstractField
 {
     function __construct($id, $value)
     {
-        if (!is_array($value)) {
-            $value = [$value];
-        }
+        $value = floatval($value);
 
         parent::__construct($id, $value);
     }

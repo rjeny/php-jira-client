@@ -2,8 +2,8 @@
 
 namespace Rjeny\Jira\Entities;
 
-use Rjeny\Jira\Entities\Fields;
-use Rjeny\Jira\Entities\Fields\Field;
+use Rjeny\Jira\Fields;
+use Rjeny\Jira\Fields\AbstractField;
 use Rjeny\Jira\JiraException;
 use Rjeny\Jira\JiraClient;
 
@@ -54,7 +54,7 @@ class Issue extends Entity
 
         foreach ($table as $row) {
             if (isset($row['type']) && isset($row['id']) && isset($row['value'])) {
-                $fieldClassName = 'Rjeny\Jira\Entities\Fields\\' . $row['type'];
+                $fieldClassName = 'Rjeny\Jira\Fields\\' . $row['type'];
                 $this->data[$row['id']] = new $fieldClassName($row['id'], $row['value']);
             }
             // TODO: LOG FOR ROW NOT USED
@@ -64,9 +64,9 @@ class Issue extends Entity
     }
 
     /**
-     * @param Field $field
+     * @param AbstractField $field
      */
-    public function pushCfs(Field $field)
+    public function pushCfs(AbstractField $field)
     {
         $this->cfs[$field->getId()] = $field;
     }

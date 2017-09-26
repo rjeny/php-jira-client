@@ -1,8 +1,8 @@
 <?php
 
-namespace Rjeny\Jira\Entities\Fields;
+namespace Rjeny\Jira\Fields;
 
-class GroupPicker extends Field
+class MultiUserPicker extends AbstractField
 {
     function __construct($id, $values)
     {
@@ -24,11 +24,7 @@ class GroupPicker extends Field
     {
         $field = [];
         foreach ($this->value as $value) {
-            if (is_int($value)) {
-                $field[] = ['id' => (string)$value];
-            } else {
-                $field[] = ['name' => $value];
-            }
+            $field[] = ['name' => (string) $value];
         }
 
         return $field;

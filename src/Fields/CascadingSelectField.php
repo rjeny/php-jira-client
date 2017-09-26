@@ -1,8 +1,8 @@
 <?php
 
-namespace Rjeny\Jira\Entities\Fields;
+namespace Rjeny\Jira\Fields;
 
-class CascadingSelectField extends Field
+class CascadingSelectField extends AbstractField
 {
 
     function __construct($id, $parent, $child=null)

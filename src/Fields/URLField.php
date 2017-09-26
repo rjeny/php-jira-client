@@ -1,8 +1,8 @@
 <?php
 
-namespace Rjeny\Jira\Entities\Fields;
+namespace Rjeny\Jira\Fields;
 
-class URLField extends Field
+class URLField extends AbstractField
 {
     function __construct($id, $value)
     {

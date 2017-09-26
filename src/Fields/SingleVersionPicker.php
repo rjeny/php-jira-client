@@ -1,8 +1,8 @@
 <?php
 
-namespace Rjeny\Jira\Entities\Fields;
+namespace Rjeny\Jira\Fields;
 
-class SingleVersionPicker extends Field
+class SingleVersionPicker extends AbstractField
 {
     function __construct($id, $values)
     {

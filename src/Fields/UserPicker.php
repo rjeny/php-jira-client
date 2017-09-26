@@ -1,11 +1,15 @@
 <?php
 
-namespace Rjeny\Jira\Entities\Fields;
+namespace Rjeny\Jira\Fields;
 
-class SelectList extends Field
+class UserPicker extends AbstractField
 {
     function __construct($id, $values)
     {
+        if (is_array($values)) {
+            $values = null;
+        }
+
         parent::__construct($id, $values);
     }
 
@@ -16,10 +20,6 @@ class SelectList extends Field
      */
     public function getField()
     {
-        if (is_int($this->value)){
-            return ['id' => (string) $this->value];
-        } else {
-            return ['value' => $this->value];
-        }
+        return ['name' => (string) $this->value];
     }
 }

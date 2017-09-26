@@ -1,12 +1,13 @@
 <?php
 
-namespace Rjeny\Jira\Entities\Fields;
+namespace Rjeny\Jira\Fields;
 
-class NumberField extends Field
+class DatePickerField extends AbstractField
 {
-    function __construct($id, $value)
+
+    function __construct($id, \DateTime $value)
     {
-        $value = floatval($value);
+        $value = $value->format('Y-m-d');
 
         parent::__construct($id, $value);
     }

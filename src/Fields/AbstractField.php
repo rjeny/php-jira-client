@@ -1,10 +1,10 @@
 <?php
 
-namespace Rjeny\Jira\Entities\Fields;
+namespace Rjeny\Jira\Fields;
 
 use Rjeny\Jira\JiraException;
 
-abstract class Field
+abstract class AbstractField
 {
     protected $type = 'SomeField';
 
