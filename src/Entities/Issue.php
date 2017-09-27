@@ -6,6 +6,7 @@ use Rjeny\Jira\Fields;
 use Rjeny\Jira\Fields\BaseAbstractField;
 use Rjeny\Jira\JiraException;
 use Rjeny\Jira\JiraClient;
+use Rjeny\Jira\Entities\Issue\IssueAttachment;
 
 /**
  * Class for Issue entity
@@ -160,6 +161,19 @@ class Issue extends BaseAbstractEntity
      */
     protected function update() {
         $this->client->sendRequest('POST', $this->name . ($this->key ? : (string) $this->id), $this->prepareRequestData());
+    }
+
+    /**
+     * Прикрепляет файл к issue
+     *
+     * @param $filePath
+     *
+     * @return IssueAttachment
+     */
+    public function addAttach($filePath) {
+        $attachment = new IssueAttachment($this, $filePath);
+        $attachment->upload();
+        return $attachment;
     }
 
     /**

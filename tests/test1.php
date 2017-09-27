@@ -8,3 +8,4 @@ use Rjeny\Jira\Entities\Issue;
 $auth   = new Base('admin', 'qwerty12345');
 $client = new JiraClient($auth, 'https://mama1tester.atlassian.net');
 $issue  = Issue::getCurrent($client, 'TEST-24');
+$attach = $issue->addAttach('../.gitignore');

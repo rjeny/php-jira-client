@@ -19,7 +19,7 @@ abstract class BaseAbstractEntity
      * Jira Client
      * @var JiraClient
      */
-    protected $client;
+    public $client;
 
     /**
      * @var string
