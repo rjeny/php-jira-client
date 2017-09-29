@@ -27,23 +27,23 @@ class Issue extends BaseAbstractEntity
 
     private $cfs = [];
 
-    function __construct(JiraClient $client, $key=null)
+    function __construct(JiraClient $client, $key = null)
     {
         $this->data = [
-            'title'       => new Fields\TextField('summary', '...'),
+            'title' => new Fields\TextField('summary', '...'),
             'description' => new Fields\TextField('description', '...'),
             'environment' => new Fields\TextField('environment', ''),
-            'project'     => new Fields\ProjectPicker('project', '...'),
-            'type'        => new Fields\SelectList('issuetype', '...'),
-            'priority'    => new Fields\SelectList('priority', ''),
-            'security'    => new Fields\SelectList('security', ''),
-            'components'  => new Fields\MultiSelect('components', ''),
-            'assignee'    => new Fields\UserPicker('assignee', ''),
-            'reporter'    => new Fields\UserPicker('reporter', ''),
-            'labels'      => new Fields\Labels('labels', ''),
-            'versions'    => new Fields\SingleVersionPicker('versions', ''),
+            'project' => new Fields\ProjectPicker('project', '...'),
+            'type' => new Fields\SelectList('issuetype', '...'),
+            'priority' => new Fields\SelectList('priority', ''),
+            'security' => new Fields\SelectList('security', ''),
+            'components' => new Fields\MultiSelect('components', ''),
+            'assignee' => new Fields\UserPicker('assignee', ''),
+            'reporter' => new Fields\UserPicker('reporter', ''),
+            'labels' => new Fields\Labels('labels', ''),
+            'versions' => new Fields\SingleVersionPicker('versions', ''),
             'fixVersions' => new Fields\SingleVersionPicker('duedate', ''),
-            'duedate'     => new Fields\DatePickerField('duedate', new \DateTime('now')),
+            'duedate' => new Fields\DatePickerField('duedate', new \DateTime('now')),
         ];
         parent::__construct($client);
     }
@@ -114,52 +114,78 @@ class Issue extends BaseAbstractEntity
      * @return bool
      */
     function __set($key, $value)
-   {
+    {
         if (isset($this->data[$key])) {
             $this->data[$key] = $this->data[$key]->setValue($value);
             return true;
         }
         return false;
-   }
+    }
 
-   public function setData($key, $value)
-   {
-       if (isset($this->data[$key])) {
-           $this->data[$key]->setValue($value);
+    public function setData($key, $value)
+    {
+        if (isset($this->data[$key])) {
+            $this->data[$key]->setValue($value);
 
-           return true;
-       }
-       return false;
-   }
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Saving object on Jira
      */
     public function save()
-   {
-       if ($this->key || $this->id) {
-           $this->update();
-       } else {
-           $this->create();
-       }
-   }
+    {
+        if ($this->key || $this->id) {
+            $this->update();
+        } else {
+            $this->create();
+        }
+    }
 
     /**
      * Set request for create
      */
-    protected function create() {
-        $response   = $this->client->sendRequest('POST', $this->name, $this->prepareRequestData());
+    protected function create()
+    {
+        $response = $this->client->sendRequest('POST', $this->name, $this->prepareRequestData());
 
-        $this->id   = $response['id'];
-        $this->key  = $response['key'];
+        $this->id = $response['id'];
+        $this->key = $response['key'];
         $this->self = $response['self'];
-   }
+    }
 
     /**
      * Set request for update
      */
-    protected function update() {
-        $this->client->sendRequest('POST', $this->name . ($this->key ? : (string) $this->id), $this->prepareRequestData());
+    protected function update()
+    {
+        $this->client->sendRequest('POST', $this->name . ($this->key ?: (string)$this->id), $this->prepareRequestData());
+    }
+
+    /**
+     * Getting create meta
+     *
+     * @return bool|mixed
+     */
+    public function getCreateMETA()
+    {
+        $project = $this->project->getValue();
+        $type    = $this->type->getValue();
+        if (!$project || !$type) {
+            echo 'Project or issuetype didnt set';
+            return false;
+        }
+        $response = $this->client->sendRequest('GET', $this->name . '/createmeta', [
+            'projectIds'  => $this->project->getValue(),
+            'issuetypeIds'=> $this->type->getValue(),
+            'expand'      => 'projects.issuetypes.fields',
+        ]);
+
+        echo print_r($response, true);
+
+        return $response;
     }
 
     /**
@@ -169,7 +195,8 @@ class Issue extends BaseAbstractEntity
      *
      * @return IssueAttachment
      */
-    public function addAttach($filePath) {
+    public function addAttach($filePath)
+    {
         $attachment = new IssueAttachment($this, $filePath);
         $attachment->upload();
         return $attachment;
@@ -212,7 +239,7 @@ class Issue extends BaseAbstractEntity
     {
         $issue = new Issue($client);
 
-        $issue->key=$key;
+        $issue->key = $key;
         $response = $client->sendRequest('GET', 'issue/' . $key);
 
         echo print_r($response, true);
