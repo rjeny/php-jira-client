@@ -76,14 +76,14 @@ class JiraClient
         $errno    = curl_errno($ch);
         $error    = curl_error($ch);
 
-        if ($errno) {
+        if (!$response || $errno) {
             throw new JiraException('Запрос произвести не удалось: '.$error, $errno);
         }
 
         $response = json_decode($response, true);
 
         if (isset($response['errorMessages']) || isset($response['errors'])) {
-            throw new JiraException(print_r($response['errors'], true));
+            throw new JiraException(print_r($response['errors'], true) . print_r($params, true));
         }
 
         echo (print_r($response, true));

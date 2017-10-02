@@ -22,12 +22,10 @@ abstract class BaseAbstractField
     /**
      * Field constructor.
      * @param $id
-     * @param $required
-     * @param $value
-     *
      * @throws JiraException
+     * @param $value
      */
-    function __construct($id, $value, $required = false)
+    function __construct($id, $value)
     {
         if (!$id) {
             throw new JiraException('Trying create Field without id!');
