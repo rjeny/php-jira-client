@@ -2,7 +2,6 @@
 
 namespace Rjeny\Jira;
 
-use MongoLog;
 /**
  * Jira REST API client
  *
@@ -36,16 +35,16 @@ class JiraClient
 
     public function sendRequest($method, $entity, $params=[])
     {
-        $ch       = curl_init();
+        $ch = curl_init();
 
         // Build url
-        $url = $this->baseUrl . '/rest/api/' . $this->apiVer . '/' . $entity . '/';
+        $url = $this->baseUrl . '/rest/api/' . $this->apiVer . '/' . $entity;
 
         echo $url;
 
         // Если будем работать методом get, то все параметры в ссылку
         if ($method == 'GET') {
-            $url .= '&' . http_build_query($params);
+            $url .= '?' . http_build_query($params);
         }
 
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -77,14 +76,14 @@ class JiraClient
         $errno    = curl_errno($ch);
         $error    = curl_error($ch);
 
-        if ($errno) {
+        if (!$response || $errno) {
             throw new JiraException('Запрос произвести не удалось: '.$error, $errno);
         }
 
         $response = json_decode($response, true);
 
         if (isset($response['errorMessages']) || isset($response['errors'])) {
-            throw new JiraException(print_r($response['errors'], true));
+            throw new JiraException(print_r($response['errors'], true) . print_r($params, true));
         }
 
         echo (print_r($response, true));

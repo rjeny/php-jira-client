@@ -30,11 +30,11 @@ class Issue extends BaseAbstractEntity
     function __construct(JiraClient $client, $key=null)
     {
         $this->data = [
-            'title'       => new Fields\TextField('summary', ''),
-            'description' => new Fields\TextField('description', ''),
+            'title'       => new Fields\TextField('summary', '...'),
+            'description' => new Fields\TextField('description', '...'),
             'environment' => new Fields\TextField('environment', ''),
-            'project'     => new Fields\ProjectPicker('project', ''),
-            'type'        => new Fields\SelectList('issuetype', ''),
+            'project'     => new Fields\ProjectPicker('project', '...'),
+            'type'        => new Fields\SelectList('issuetype', '...'),
             'priority'    => new Fields\SelectList('priority', ''),
             'security'    => new Fields\SelectList('security', ''),
             'components'  => new Fields\MultiSelect('components', ''),
@@ -90,9 +90,8 @@ class Issue extends BaseAbstractEntity
         foreach ($table as $row) {
             if (isset($row['type']) && isset($row['id']) && isset($row['value'])) {
                 $fieldClassName = 'Rjeny\Jira\Fields\\' . $row['type'];
-                $this->data[$row['id']] = new $fieldClassName($row['id'], $row['value']);
+                $this->cfs['customfield_' . $row['id']] = new $fieldClassName('customfield_' . $row['id'], $row['value']);
             }
-            // TODO: LOG FOR ROW NOT USED
         }
 
         return true;
@@ -139,10 +138,12 @@ class Issue extends BaseAbstractEntity
     public function save()
    {
        if ($this->key || $this->id) {
-           $this->update();
+           $response = $this->update();
        } else {
-           $this->create();
+           $response = $this->create();
        }
+
+       return $response;
    }
 
     /**
@@ -154,6 +155,8 @@ class Issue extends BaseAbstractEntity
         $this->id   = $response['id'];
         $this->key  = $response['key'];
         $this->self = $response['self'];
+
+        return $response;
    }
 
     /**
