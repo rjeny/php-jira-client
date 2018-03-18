@@ -188,7 +188,7 @@ class Issue extends BaseAbstractEntity
      * @param            $project
      * @param            $type
      *
-     * @return Issue
+     * @return array
      */
     public static function createNew(JiraClient $client, $title, $description, $project, $type)
     {
@@ -199,9 +199,12 @@ class Issue extends BaseAbstractEntity
         $issue->project->setValue($project);
         $issue->type->setValue($type);
 
-        $issue->save();
+        $response = $issue->save();
 
-        return $issue;
+        return [
+            'issue'    => $issue,
+            'response' => $response,
+        ];
     }
 
     /**
