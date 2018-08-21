@@ -1,5 +1,5 @@
 # php-jira-client
-Just Alpha now
+Just Alpha
 
 ## TODO:
 More entities
