@@ -2,7 +2,7 @@
 Just Alpha now
 
 ## TODO:
-(DANGEROUS!!! RUSSIAN!!! JUNIOR!! DEV!!!)
+More entities
 
 ### Общие
 
